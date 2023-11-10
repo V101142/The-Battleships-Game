@@ -1,0 +1,42 @@
+def get_integer_input(prompt, min_value=None, max_value=None):
+    """Utility function to get validated integer input from user."""
+    while True:
+        try:
+            user_input = int(input(prompt))
+            if (min_value is not None and user_input < min_value) or (max_value is not None and user_input > max_value):
+                print(f"Please enter a value between {min_value} and {max_value}.")
+            else:
+                return user_input
+        except ValueError:
+            print("Invalid input, please enter a valid integer.")
+
+def save_game(game_state, file_path="game_save.json"):
+    """Saves the current game state to a file."""
+    import json
+    try:
+        with open(file_path, 'w') as file:
+            json.dump(game_state, file)
+        print("Game saved successfully!")
+    except Exception as e:
+        print(f"Error saving game: {e}")
+
+def load_game(file_path="game_save.json"):
+    """Loads the game state from a file."""
+    import json
+    try:
+        with open(file_path, 'r') as file:
+            game_state = json.load(file)
+        print("Game loaded successfully!")
+        return game_state
+    except FileNotFoundError:
+        print("Save file not found.")
+    except json.JSONDecodeError:
+        print("Save file is corrupted.")
+    except Exception as e:
+        print(f"Error loading game: {e}")
+
+def clear_screen():
+    """Clears the terminal screen."""
+    import os
+    os.system('cls' if os.name == 'nt' else 'clear')
+
