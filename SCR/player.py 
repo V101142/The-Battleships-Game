@@ -1,0 +1,16 @@
+from units import Unit
+
+class Player:
+    def __init__(self, name):
+        self.name = name
+        self.units = []
+
+    def add_unit(self, unit):
+        if isinstance(unit, Unit):
+            self.units.append(unit)
+
+    def get_alive_units(self):
+        return [unit for unit in self.units if unit.is_alive()]
+
+    def has_units_alive(self):
+        return any(unit.is_alive() for unit in self.units)
